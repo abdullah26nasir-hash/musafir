@@ -39,7 +39,7 @@ export const Welcome = ({ onStart, onSafety }: { onStart: () => void; onSafety: 
         Musafir watches the things that matter - official travel advice, heat, crowds, permits - and plans the journey around them.
       </p>
 
-      <div className="fade-in mt-8 grid w-full max-w-lg grid-cols-1 gap-3 sm:grid-cols-3" style={{ animationDelay: '240ms' }}>
+      <div className="fade-in mt-8 grid w-full max-w-lg grid-cols-1 items-start gap-3 sm:grid-cols-3" style={{ animationDelay: '240ms' }}>
         <div className="card shadow-card p-4 text-left">
           <p className="text-[10px] font-bold uppercase tracking-widest text-mist">Makkah now</p>
           {w ? <>
@@ -58,8 +58,8 @@ export const Welcome = ({ onStart, onSafety }: { onStart: () => void; onSafety: 
         <div className="card shadow-card p-4 text-left">
           <p className="text-[10px] font-bold uppercase tracking-widest text-mist">Travel advice</p>
           {a ? <>
-            <p className="mt-1.5"><Chip tone={a.level}>{a.level === 'clear' ? 'No advisory' : a.level === 'caution' ? 'Some areas' : 'Advisory'}</Chip></p>
-            <p className="mt-2 text-xs leading-snug text-mist">{a.levelLabel}</p>
+            <p className="mt-1.5"><Chip tone={a.level}>{a.level === 'clear' ? 'No advisory' : a.level === 'caution' ? 'Border areas' : 'Advisory'}</Chip></p>
+            <p className="mt-2 text-xs leading-snug text-mist">{a.level === 'clear' ? a.levelLabel : 'Makkah, Madinah & Jeddah carry no advisory'}</p>
           </> : <p className="mt-2 text-sm text-mist">Loading…</p>}
         </div>
       </div>

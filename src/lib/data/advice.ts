@@ -34,7 +34,7 @@ async function load(): Promise<Advice> {
     // name the areas, e.g. the Yemen border
     const stop = warnings.split(/Find out more/i)[0];
     const areas = [...stop.matchAll(/advises against (?:all|all but essential) travel to (?:within [^.]*?)(?:\.|$)/gi)].map(m => m[0].replace(/advises against /i, '').replace(/\.$/, ''));
-    levelLabel = 'FCDO advises against ' + (areas[0] || 'travel to some border areas') + '. Makkah, Madinah & Jeddah carry no advisory';
+    levelLabel = 'FCDO advises against travel to areas near the Yemen border. Makkah, Madinah & Jeddah carry no advisory.';
   }
   const summaryClean = warnings.replace(/^Your travel insurance could be invalidated if you travel against advice from the Foreign, Commonwealth & Development Office \(FCDO\)\.?/i, '').trim();
   return {
