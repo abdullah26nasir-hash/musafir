@@ -3,6 +3,8 @@ import { PlanInput, Pkg } from '../types';
 import { PRE_TRAVEL, PACKING, ChecklistItem } from '../data/content';
 import { getPrayer, withNext, PrayerData } from '../lib/data/prayer';
 import { getFx } from '../lib/data/fx';
+import { getAdvice, Advice } from '../lib/data/advice';
+import { crowdLevel } from '../data/content';
 import { Btn, Chip, SectionTitle, SourceLine } from '../components/ui';
 
 const Checklist = ({ title, items }: { title: string; items: ChecklistItem[] }) => {
@@ -36,9 +38,10 @@ export const Trip = ({ plan, pkg, onSafety, onReplan }: { plan: PlanInput; pkg: 
   const [prayer, setPrayer] = useState<{ data?: PrayerData; at?: number }>({});
   const [city, setCity] = useState<'Makkah' | 'Madinah'>('Makkah');
   const [fx, setFx] = useState<{ data?: { rate: number }; at?: number }>({});
+  const [adv, setAdv] = useState<{ data?: Advice }>({});
   const [now, setNow] = useState(Date.now());
   useEffect(() => { getPrayer(city).then(setPrayer).catch(() => {}); }, [city]);
-  useEffect(() => { getFx().then(setFx).catch(() => {}); }, []);
+  useEffect(() => { getFx().then(setFx).catch(() => {}); getAdvice().then(setAdv).catch(() => {}); }, []);
   useEffect(() => { const t = setInterval(() => setNow(Date.now()), 30000); return () => clearInterval(t); }, []);
   const p = prayer.data && withNext(prayer.data);
 
@@ -88,6 +91,21 @@ export const Trip = ({ plan, pkg, onSafety, onReplan }: { plan: PlanInput; pkg: 
         </div>}
         {fx.data && <p className="tnum mt-4 text-sm text-mist">£1 = <span className="font-bold text-sand">{fx.data.rate.toFixed(2)} SAR</span> <SourceLine label="open.er-api.com" at={fx.at} /></p>}
       </div>
+
+      {(adv.data || p) && <div className="card mt-4 grid grid-cols-3 divide-x divide-mist/15 text-center" aria-label="Journey readiness">
+        <div className="p-3">
+          <p className="text-[9px] font-bold uppercase tracking-widest text-mist">Advisory</p>
+          <p className={`mt-1 text-xs font-bold ${adv.data?.level === 'clear' ? 'text-clear' : adv.data?.level === 'caution' ? 'text-caution' : 'text-warning'}`}>{adv.data ? (adv.data.level === 'clear' ? 'Clear' : adv.data.level === 'caution' ? 'Border areas' : 'Warning') : '…'}</p>
+        </div>
+        <div className="p-3">
+          <p className="text-[9px] font-bold uppercase tracking-widest text-mist">Season</p>
+          <p className="mt-1 text-xs font-bold text-sand">{p ? (crowdLevel(p.hijri.monthEn).level[0].toUpperCase() + crowdLevel(p.hijri.monthEn).level.slice(1)) : '…'}</p>
+        </div>
+        <div className="p-3">
+          <p className="text-[9px] font-bold uppercase tracking-widest text-mist">Permits</p>
+          <a href="https://www.nusuk.sa" target="_blank" rel="noreferrer" className="mt-1 inline-block text-xs font-bold text-gold">Nusuk ↗</a>
+        </div>
+      </div>}
 
       <div className="mt-6"><Btn kind="ghost" className="w-full" onClick={onSafety}>Open the live safety briefing</Btn></div>
 
