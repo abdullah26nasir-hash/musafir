@@ -34,9 +34,11 @@ const Checklist = ({ title, items }: { title: string; items: ChecklistItem[] }) 
 
 export const Trip = ({ plan, pkg, onSafety, onReplan }: { plan: PlanInput; pkg: Pkg; onSafety: () => void; onReplan: () => void }) => {
   const [prayer, setPrayer] = useState<{ data?: PrayerData; at?: number }>({});
+  const [city, setCity] = useState<'Makkah' | 'Madinah'>('Makkah');
   const [fx, setFx] = useState<{ data?: { rate: number }; at?: number }>({});
   const [now, setNow] = useState(Date.now());
-  useEffect(() => { getPrayer('Makkah').then(setPrayer).catch(() => {}); getFx().then(setFx).catch(() => {}); }, []);
+  useEffect(() => { getPrayer(city).then(setPrayer).catch(() => {}); }, [city]);
+  useEffect(() => { getFx().then(setFx).catch(() => {}); }, []);
   useEffect(() => { const t = setInterval(() => setNow(Date.now()), 30000); return () => clearInterval(t); }, []);
   const p = prayer.data && withNext(prayer.data);
 
@@ -66,7 +68,13 @@ export const Trip = ({ plan, pkg, onSafety, onReplan }: { plan: PlanInput; pkg: 
             <p className="text-sm text-mist">{pkg.madinahHotel}</p>
           </div>
           {p && <div className="text-right">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-mist">Next prayer · Haram</p>
+            <div className="mb-1 inline-flex rounded-full border border-mist/30 p-0.5 text-[10px] font-bold" role="group" aria-label="Prayer times city">
+              {(['Makkah','Madinah'] as const).map(c => (
+                <button key={c} onClick={() => setCity(c)} aria-pressed={city === c}
+                  className={`btn-press rounded-full px-3 py-1 ${city === c ? 'bg-gold/15 text-gold' : 'text-mist'}`}>{c}</button>
+              ))}
+            </div>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-mist">Next prayer · {city === 'Makkah' ? 'Haram' : 'the Prophet\u2019s Mosque'}</p>
             <p className="font-display tnum mt-1 text-2xl font-semibold text-gold">{p.nextName} {p.nextTime}</p>
             <p className="text-xs text-mist">{p.hijri.day} {p.hijri.monthEn} {p.hijri.year} AH</p>
           </div>}
