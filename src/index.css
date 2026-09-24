@@ -1,25 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  --color-kiswa: #0D140F;
-  --color-ink: #152019;
-  --color-gold: #C7A24B;
-  --color-gold-soft: #E3C87E;
-  --color-dome: #1B6B54;
-  --color-sand: #F5F0E4;
-  --color-mist: #948C77;
-  --color-clear: #3FA96C;
-  --color-caution: #D9A03F;
-  --color-warning: #C24E38;
-  --font-display: "Clash Display", ui-sans-serif, system-ui, sans-serif;
+  --color-kiswa: #F7F4EC;
+  --color-ink: #FFFFFF;
+  --color-gold: #A8842F;
+  --color-gold-soft: #C9A85C;
+  --color-dome: #156A52;
+  --color-sand: #1B2A22;
+  --color-mist: #66736A;
+  --color-clear: #2E7D4F;
+  --color-caution: #B07A1E;
+  --color-warning: #B3382C;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-arabic: "Amiri", serif;
 }
 
-html { color-scheme: dark; }
+html { color-scheme: light; }
 body {
   @apply bg-kiswa text-sand font-body antialiased;
-  background-image: radial-gradient(1200px 600px at 50% -10%, rgba(199,162,75,0.07), transparent 60%);
+  background-image: radial-gradient(1200px 600px at 50% -10%, rgba(168,132,47,0.06), transparent 60%);
 }
 .font-display { font-family: var(--font-display); }
 .font-arabic { font-family: var(--font-arabic); }

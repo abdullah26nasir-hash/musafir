@@ -25,7 +25,7 @@ export const SourceLine = ({ label, at, stale }: { label: string; at?: number; s
 export const Btn = ({ children, onClick, kind = 'gold', className = '', ariaLabel }: { children: ReactNode; onClick?: () => void; kind?: 'gold' | 'ghost'; className?: string; ariaLabel?: string }) => (
   <button onClick={onClick} aria-label={ariaLabel}
     className={`btn-press inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold tracking-wide ${
-      kind === 'gold' ? 'bg-gold text-kiswa hover:bg-gold-soft' : 'border border-mist/40 text-sand hover:border-gold/60 hover:text-gold'
+      kind === 'gold' ? 'bg-dome text-white hover:bg-dome/90 shadow-card' : 'border border-mist/40 text-sand hover:border-dome/60 hover:text-dome'
     } ${className}`}>
     {children}
   </button>

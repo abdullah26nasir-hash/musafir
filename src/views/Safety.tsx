@@ -72,14 +72,16 @@ export const Safety = ({ onPlan }: { onPlan: () => void }) => {
               <span className="flex items-center gap-3 text-sm font-bold"><Star size={16} className="text-gold" />{g.title}</span>
               <span className={`text-gold transition-transform duration-200 ${open === g.id ? 'rotate-45' : ''}`} aria-hidden="true">+</span>
             </button>
-            {open === g.id && (
-              <div className="fade-in border-t border-mist/15 px-5 pb-5 pt-4">
-                <ul className="space-y-2.5">
-                  {g.points.map((pt, i) => <li key={i} className="flex gap-3 text-sm leading-relaxed text-sand/85"><span className="mt-[9px] size-1 shrink-0 rounded-full bg-gold" aria-hidden="true" />{pt}</li>)}
-                </ul>
-                {g.source && <p className="mt-4 text-[11px] text-mist">Source: {g.source}</p>}
+            <div className={`grid transition-[grid-template-rows] duration-300 ease-out ${open === g.id ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+              <div className="overflow-hidden">
+                <div className={`px-5 pb-5 pt-4 ${open === g.id ? 'border-t border-mist/15' : ''}`}>
+                  <ul className="space-y-2.5">
+                    {g.points.map((pt, i) => <li key={i} className="flex gap-3 text-sm leading-relaxed text-sand/85"><span className="mt-[9px] size-1 shrink-0 rounded-full bg-gold" aria-hidden="true" />{pt}</li>)}
+                  </ul>
+                  {g.source && <p className="mt-4 text-[11px] text-mist">Source: {g.source}</p>}
+                </div>
               </div>
-            )}
+            </div>
           </div>
         ))}
       </div>

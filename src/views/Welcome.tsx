@@ -27,7 +27,8 @@ export const Welcome = ({ onStart, onSafety }: { onStart: () => void; onSafety: 
   const cd = `${Math.floor(mins / 60)}h ${String(mins % 60).padStart(2, '0')}m`;
 
   return (
-    <div className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden px-6 py-10 text-center">
+    <div className="relative">
+      <div className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden px-6 py-10 text-center">
       <div className="pointer-events-none absolute inset-0 opacity-[0.05] text-gold" aria-hidden="true">
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"><Star size={560} /></div>
       </div>
@@ -70,6 +71,48 @@ export const Welcome = ({ onStart, onSafety }: { onStart: () => void; onSafety: 
         <Btn kind="ghost" onClick={onSafety}>See the safety briefing</Btn>
       </div>
       <SourceLine label="Live from Open-Meteo, Aladhan & GOV.UK FCDO" at={Math.max(prayer.at || 0, wx.at || 0, advice.at || 0) || undefined} />
+      </div>
+
+      {/* How it works */}
+      <section className="mx-auto w-full max-w-2xl px-6 pb-8 pt-14">
+        <p className="text-center text-[11px] font-bold uppercase tracking-[0.2em] text-gold">How Musafir works</p>
+        <div className="mt-6 space-y-3">
+          {[
+            { n: '1', t: 'Check the ground truth', d: 'Before anything is planned, Musafir reads the live FCDO advice for Saudi Arabia, the heat in Makkah, the Hijri season and the crowds it brings. If official advice changes, the plan changes with it.' },
+            { n: '2', t: 'Shape the journey', d: 'Your departure city, month, travellers, nights and budget become three honest packages - flights, hotels and walking distance to the Haram, with live fares a tap away.' },
+            { n: '3', t: 'Walk it prepared', d: 'A document checklist, permits to book, prayer times at the Haram and the numbers to call if something goes wrong - carried with you for the whole trip.' },
+          ].map((s, i) => (
+            <div key={s.n} className="card shadow-card fade-in flex gap-4 p-5 text-left" style={{ animationDelay: `${i * 90}ms` }}>
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-dome/10 font-display text-base font-semibold text-dome" aria-hidden="true">{s.n}</span>
+              <div>
+                <p className="font-display text-lg font-semibold leading-snug">{s.t}</p>
+                <p className="mt-1 text-sm leading-relaxed text-mist">{s.d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Reassurance / edge cases */}
+      <section className="mx-auto w-full max-w-2xl px-6 pb-14">
+        <div className="card fade-in grid grid-cols-1 gap-x-6 gap-y-3 p-6 text-left sm:grid-cols-2" style={{ animationDelay: '200ms' }}>
+          {[
+            ['No account, nothing to install', 'Opens in the browser and keeps your plan on this device.'],
+            ['Free to use', 'Live data comes from keyless public sources - no card, no trial.'],
+            ['When signals drop', 'Anything stale or unreachable is labelled as such; advice is never guessed.'],
+            ['Built for the journey', 'Readable in bright sun, tappable one-handed, respectful of reduced motion.'],
+          ].map(([t, d]) => (
+            <div key={t} className="flex gap-3">
+              <Star size={14} className="mt-1 shrink-0 text-gold" />
+              <div>
+                <p className="text-sm font-bold">{t}</p>
+                <p className="mt-0.5 text-xs leading-relaxed text-mist">{d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-8 flex justify-center"><Btn onClick={onStart}>Plan my Umrah</Btn></div>
+      </section>
     </div>
   );
 };

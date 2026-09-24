@@ -17,13 +17,13 @@ const Checklist = ({ title, items }: { title: string; items: ChecklistItem[] }) 
         <h4 className="text-sm font-bold">{title}</h4>
         <span className="tnum text-xs font-bold text-gold">{pct}%</span>
       </div>
-      <div className="mt-3 h-1 overflow-hidden rounded-full bg-kiswa"><div className="h-full rounded-full bg-gold transition-all duration-300" style={{ width: `${pct}%` }} /></div>
+      <div className="mt-3 h-1 overflow-hidden rounded-full bg-mist/20"><div className="h-full rounded-full bg-dome transition-all duration-300" style={{ width: `${pct}%` }} /></div>
       <ul className="mt-4 space-y-1">
         {items.map(it => (
           <li key={it.id} className="flex items-center gap-3">
             <button onClick={() => toggle(it.id)} aria-pressed={done.has(it.id)} aria-label={it.text}
               className={`btn-press flex min-h-11 flex-1 items-center gap-3 rounded-xl px-2 text-left text-sm ${done.has(it.id) ? 'text-mist line-through' : 'text-sand/90'}`}>
-              <span className={`flex size-5 shrink-0 items-center justify-center rounded-md border ${done.has(it.id) ? 'border-gold bg-gold text-kiswa' : 'border-mist/40'}`}>{done.has(it.id) ? '✓' : ''}</span>
+              <span className={`flex size-5 shrink-0 items-center justify-center rounded-md border ${done.has(it.id) ? 'border-dome bg-dome text-white' : 'border-mist/40'}`}>{done.has(it.id) ? '✓' : ''}</span>
               {it.text}
             </button>
             {it.link && <a href={it.link} target="_blank" rel="noreferrer" className="shrink-0 text-xs font-bold text-gold">{it.linkLabel} ↗</a>}
