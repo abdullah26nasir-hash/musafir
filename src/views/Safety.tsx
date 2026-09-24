@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAdvice, Advice } from '../lib/data/advice';
+import { getUpdates, UpdatesPayload } from '../lib/data/updates';
+import { ago } from '../lib/data/cache';
 import { getWeather, Weather, heatLevel, heatGuidance } from '../lib/data/weather';
 import { getPrayer } from '../lib/data/prayer';
 import { EMERGENCY, SAFETY_GUIDES, crowdLevel } from '../data/content';
@@ -10,12 +12,14 @@ const toneTxt = { clear: 'text-clear', caution: 'text-caution', warning: 'text-w
 
 export const Safety = ({ onPlan }: { onPlan: () => void }) => {
   const [advice, setAdvice] = useState<{ data?: Advice; at?: number; stale?: boolean }>({});
+  const [updates, setUpdates] = useState<{ data?: UpdatesPayload; at?: number; stale?: boolean }>({});
   const [wxM, setWxM] = useState<{ data?: Weather }>({});
   const [wxD, setWxD] = useState<{ data?: Weather }>({});
   const [hijri, setHijri] = useState<string>('');
   const [open, setOpen] = useState<string | null>('crowds');
   useEffect(() => {
     getAdvice().then(setAdvice).catch(() => {});
+    getUpdates().then(setUpdates).catch(() => {});
     getWeather('Makkah').then(setWxM).catch(() => {});
     getWeather('Madinah').then(setWxD).catch(() => {});
     getPrayer('Makkah').then(r => setHijri(r.data.hijri.monthEn)).catch(() => {});
@@ -61,6 +65,24 @@ export const Safety = ({ onPlan }: { onPlan: () => void }) => {
           </div>
         </div>
       </div>
+
+      {/* Live travel updates */}
+      <h3 className="font-display mt-12 mb-4 text-2xl font-semibold">Live travel updates</h3>
+      <div className="card shadow-hero divide-y divide-mist/15">
+        {!updates.data && <p className="p-5 text-sm text-mist">Checking official sources…</p>}
+        {updates.data && updates.data.items.length === 0 && <p className="p-5 text-sm text-mist">No new updates from official sources right now.</p>}
+        {updates.data?.items.map(u => (
+          <a key={u.id} href={u.url} target="_blank" rel="noreferrer" className="flex items-start gap-4 p-5 transition-colors hover:bg-white/[0.03]">
+            <div className="flex-1">
+              <p className="text-sm font-bold leading-snug">{u.title}</p>
+              {u.summary && <p className="mt-1 text-xs leading-relaxed text-mist">{u.summary}</p>}
+              <p className="mt-2 text-[11px] font-bold text-gold">{u.sourceLabel}{u.published ? ` · ${ago(Date.parse(u.published))}` : ''}</p>
+            </div>
+            <span className="mt-1 shrink-0 text-gold" aria-hidden="true">&#8599;</span>
+          </a>
+        ))}
+      </div>
+      {updates.data && <SourceLine label={updates.data.sources.map(sr => sr.label + (sr.ok ? '' : ' (unavailable)')).join(' · ')} at={updates.at} stale={updates.stale} />}
 
       {/* Guides */}
       <h3 className="font-display mt-12 mb-4 text-2xl font-semibold">Pilgrim safety guides</h3>
