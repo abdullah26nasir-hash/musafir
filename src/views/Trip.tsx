@@ -84,12 +84,15 @@ export const Trip = ({ plan, pkg, onSafety, onReplan }: { plan: PlanInput; pkg: 
       <div className="mt-6"><Btn kind="ghost" className="w-full" onClick={onSafety}>Open the live safety briefing</Btn></div>
 
       <h3 className="font-display mt-10 mb-4 text-2xl font-semibold">Day by day</h3>
-      <ol className="relative space-y-4 border-l border-mist/25 pl-6">
+      <ol className="relative space-y-5 border-l border-mist/25 pl-6">
         {itinerary.map(it => (
-          <li key={it.d} className="relative">
-            <span className={`absolute -left-[31px] top-1 size-2.5 rounded-full ${it.city === 'Makkah' ? 'bg-gold' : 'bg-dome'}`} aria-hidden="true" />
-            <p className="text-[10px] font-bold uppercase tracking-widest text-mist">Day {it.d} · {it.city}</p>
-            <p className="mt-0.5 text-sm text-sand/90">{it.note}</p>
+          <li key={it.d} className="relative flex items-baseline gap-4">
+            <span className={`absolute -left-[31px] top-1.5 size-2.5 rounded-full ${it.city === 'Makkah' ? 'bg-gold' : 'bg-dome'}`} aria-hidden="true" />
+            <span className="font-display tnum w-10 shrink-0 text-2xl font-semibold text-gold/80" aria-hidden="true">{String(it.d).padStart(2, '0')}</span>
+            <span>
+              <span className="block text-[10px] font-bold uppercase tracking-widest text-mist">{it.city}</span>
+              <span className="mt-0.5 block text-sm text-sand/90">{it.note}</span>
+            </span>
           </li>
         ))}
       </ol>
