@@ -1,0 +1,7 @@
+{
+  "name": "Musafir - Umrah Planner",
+  "description": "A premium, focused app to plan your Umrah journey with simplicity and beauty.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
