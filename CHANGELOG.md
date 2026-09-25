@@ -1,5 +1,9 @@
 # Changelog
 
+## 25 Sep 2026 (3) - Landing: spinning star removed
+- Removed the spinning star backdrop from the landing (his call). Static layout otherwise unchanged.
+
+
 ## 25 Sep 2026 (2) - Brand kit applied + updates feed fix
 - Live travel updates fixed: server now decodes escaped entities before stripping markup (raw "<div class=..." text can no longer leak), items older than 21 days are dropped as stale, and the feed is FCDO-only - NATS/Eurocontrol removed (off-spec noise for Umrah travellers).
 - Musafir Brand Foundation v0.1 applied to the UI: Route Green #47695D primary, Paper Sand #F3EFE5 surface, Night Ink #17201D text, Stone borders, Saffron accents, advisory scale (Clear/Awareness/Severe); Newsreader display + Geist UI + Geist Mono data type; 5% paper-grain texture layer; Route Mark logo tile in the header; favicon + apple-touch-icon from the logo mark.
