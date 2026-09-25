@@ -1,5 +1,12 @@
 # Changelog
 
+## 25 Sep 2026 (5) - Premium uplift pass (v0.4), per his Drive design resources
+- Applied his Design Guide, Raroque principles and the Astra reference-research method explicitly to the night restyle.
+- Real product evidence section (Design Guide pattern 6 / Astra: concrete workflow over claims): "Inside the app" shows the actual first chat exchange verbatim, framed with layered shadow.
+- Big/small contrast pushed further (headline to 7.5rem on large screens); zero-radius broadsheet tell broken with rounded-3xl media + layered shadow presets.
+- Motion per his Guide's framework: CTA hover lift + press scale on the shared ease-out curve, transform+box-shadow only, reduced-motion twins.
+- PostHog now respects Do Not Track (standing-rule parity with Rally; from the Musafir audit).
+
 ## 25 Sep 2026 (4) - Full-app night restyle (v0.3)
 - His feedback: go really dark (Behold-level near-black), drop the literal hero photo, rework the accent palette (green+saffron did not work), restyle the whole app not just the landing.
 - Near-black canvas (#070807); typography, space, and hairlines carry the landing - no hero photograph.

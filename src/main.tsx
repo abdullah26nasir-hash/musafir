@@ -9,6 +9,7 @@ const loadAnalytics = () =>
     posthog.init('phc_oTd3HcDMFXU65oc4vhfT4uvXm3vVeWReubc2QnWysCW7', {
       api_host: 'https://eu.i.posthog.com',
       person_profiles: 'identified_only',
+      respect_dnt: true,
       capture_pageleave: true,
       disable_external_dependency_loading: true,
     });

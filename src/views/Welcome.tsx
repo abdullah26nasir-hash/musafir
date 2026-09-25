@@ -45,14 +45,14 @@ export const Welcome = ({ onStart, onChat, onSafety }: { onStart: () => void; on
         <Atmosphere />
         <div className="relative z-10 flex w-full max-w-3xl flex-col items-center">
           <p className="font-arabic fade-in text-xl text-gold-soft/90" lang="ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-          <h1 className="fade-in mt-8 font-body text-[3.4rem] font-extrabold leading-[0.95] tracking-[-0.045em] text-sand sm:text-8xl" style={{ animationDelay: '90ms' }}>
+          <h1 className="fade-in mt-8 font-body text-[3.4rem] font-extrabold leading-[0.95] tracking-[-0.045em] text-sand sm:text-8xl lg:text-[7.5rem]" style={{ animationDelay: '90ms' }}>
             Your Umrah,<br /><span className="font-display font-medium italic tracking-normal text-gold-soft">safely</span> planned.
           </h1>
           <p className="fade-in mt-6 max-w-md text-base leading-relaxed text-sand/70 sm:text-lg" style={{ animationDelay: '180ms' }}>
             Musafir watches the things that matter - official travel advice, heat, crowds, permits - and plans the journey around them.
           </p>
           <div className="fade-in mt-10 flex w-full max-w-md flex-col items-center gap-4" style={{ animationDelay: '270ms' }}>
-            <button onClick={onChat} className="btn-press min-h-12 w-full rounded-full bg-sand px-8 text-[15px] font-bold text-kiswa sm:w-auto sm:min-w-56">
+            <button onClick={onChat} className="cta-lift min-h-12 w-full rounded-full bg-sand px-8 text-[15px] font-bold text-kiswa sm:w-auto sm:min-w-56">
               Chat with Musafir
             </button>
             <button onClick={onStart} className="btn-press min-h-11 px-4 text-sm font-semibold text-sand/80 underline decoration-kiswa/30 underline-offset-8 hover:text-sand">
@@ -83,9 +83,35 @@ export const Welcome = ({ onStart, onChat, onSafety }: { onStart: () => void; on
         ))}
       </section>
 
+
+      {/* Inside the app - real product evidence, verbatim from the live chat */}
+      <section className="relative z-10 mx-auto w-full max-w-2xl px-6 pb-6">
+        <p className="tnum mb-4 text-[10px] uppercase tracking-[0.2em] text-sand/40">Inside the app</p>
+        <div className="overflow-hidden rounded-3xl border border-sand/10 bg-ink shadow-hero">
+          <div className="flex items-center gap-3 border-b border-sand/10 px-5 py-3.5">
+            <span className="flex size-7 items-center justify-center rounded-lg bg-dome/15 text-[13px] text-gold-soft" aria-hidden="true">&#10022;</span>
+            <div>
+              <p className="text-[13px] font-bold leading-tight text-sand">Musafir</p>
+              <p className="text-[10px] leading-tight text-sand/45">Plans from your answers</p>
+            </div>
+          </div>
+          <div className="space-y-4 px-5 py-5">
+            <div className="max-w-[85%] rounded-2xl rounded-tl-md border border-sand/10 bg-sand/[0.04] px-4 py-3">
+              <p className="text-sm leading-relaxed text-sand/85">Salaam. I&rsquo;ll ask a few quick questions and build the plan from your answers. Six of them, that&rsquo;s all.</p>
+            </div>
+            <div className="flex flex-wrap gap-2" aria-hidden="true">
+              {['London', 'Birmingham', 'Manchester', 'Leicester'].map((c) => (
+                <span key={c} className="rounded-full border border-sand/15 px-4 py-2 text-[13px] font-semibold text-sand/75">{c}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+        <p className="tnum mt-2 text-[9px] uppercase tracking-[0.14em] text-sand/35">The real chat - first question, as it ships</p>
+      </section>
+
       {/* Full-bleed courtyard band */}
       <div className="relative z-10 mx-auto w-full max-w-2xl px-6 pb-6">
-        <div className="overflow-hidden rounded-2xl border border-sand/10">
+        <div className="overflow-hidden rounded-3xl border border-sand/10 shadow-hero">
           <img src="/haram-court.webp" alt="Pilgrims performing tawaf around the Kaaba in the Grand Mosque courtyard" className="h-56 w-full object-cover sm:h-72" loading="lazy" />
         </div>
         <p className="tnum mt-2 text-[9px] uppercase tracking-[0.14em] text-sand/35">The Grand Mosque, Makkah · Photo: omar_chatriwala (CC BY 2.0)</p>
@@ -107,7 +133,7 @@ export const Welcome = ({ onStart, onChat, onSafety }: { onStart: () => void; on
           ))}
         </div>
         <div className="mt-12 flex flex-col items-center gap-4">
-          <button onClick={onChat} className="btn-press min-h-12 rounded-full bg-sand px-10 text-[15px] font-bold text-kiswa">Chat with Musafir</button>
+          <button onClick={onChat} className="cta-lift min-h-12 rounded-full bg-sand px-10 text-[15px] font-bold text-kiswa">Chat with Musafir</button>
           <button onClick={onSafety} className="btn-press min-h-11 px-4 text-xs font-bold text-sand/55 underline underline-offset-4 hover:text-sand">Read the safety briefing first</button>
         </div>
       </section>
