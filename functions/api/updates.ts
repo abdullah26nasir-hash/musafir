@@ -15,11 +15,10 @@ const DESTINATIONS = ['saudi arabia', 'turkey', 'united arab emirates', 'morocco
 
 const FEEDS: FeedDef[] = [
   { id: 'fcdo', label: 'GOV.UK FCDO travel advice', url: 'https://www.gov.uk/foreign-travel-advice.atom', type: 'atom', max: 8, onlyTitles: DESTINATIONS },
-  { id: 'nats', label: 'NATS - UK airspace', url: 'https://www.nats.aero/feed/', type: 'rss', max: 5 },
-  { id: 'eurocontrol', label: 'Eurocontrol - European airspace', url: 'https://www.eurocontrol.int/rss.xml', type: 'rss', max: 5 },
 ];
 
-const strip = (s: string) => s.replace(/<!\[CDATA\[|\]\]>/g, '').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
+const decode = (s: string) => s.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/&nbsp;/g, ' ');
+const strip = (s: string) => decode(decode(s.replace(/<!\[CDATA\[|\]\]>/g, '')).replace(/<[^>]+>/g, ' ')).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 const pick = (xml: string, tag: string) => { const m = xml.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`, 'i')); return m ? strip(m[1]) : ''; };
 const pickAttr = (xml: string, tag: string, attr: string) => { const m = xml.match(new RegExp(`<${tag}[^>]*${attr}="([^"]+)"`, 'i')); return m ? m[1] : ''; };
 const iso = (s: string) => { const t = Date.parse(s); return Number.isNaN(t) ? '' : new Date(t).toISOString(); };
@@ -33,6 +32,7 @@ function parseFeed(feed: FeedDef, xml: string): UpdateItem[] {
     if (feed.onlyTitles && !feed.onlyTitles.includes(title.toLowerCase())) continue;
     const link = feed.type === 'rss' ? pick(c, 'link') : (pickAttr(c, 'link', 'href') || pick(c, 'link'));
     const published = iso(pick(c, feed.type === 'rss' ? 'pubDate' : 'updated') || pick(c, 'published'));
+    if (!published || Date.now() - Date.parse(published) > 21 * 24 * 3600 * 1000) continue; // stale items are not updates
     const summary = (pick(c, 'summary') || pick(c, 'description')).slice(0, 220);
     out.push({ id: `${feed.id}:${link || title}`, source: feed.id, sourceLabel: feed.label, title, url: link, published, summary });
     if (out.length >= feed.max) break;

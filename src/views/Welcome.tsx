@@ -31,7 +31,7 @@ export const Welcome = ({ onStart, onChat, onSafety }: { onStart: () => void; on
       {/* HERO */}
       <div className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden px-6 py-10 text-center">
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.06] text-gold spin-slow"><Star size={640} /></div>
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.08] text-saffron spin-slow"><Star size={640} /></div>
           <div className="absolute left-1/2 top-0 h-72 w-[42rem] -translate-x-1/2 rounded-full bg-gold/10 blur-3xl" />
         </div>
         <p className="font-arabic fade-in text-2xl text-gold" lang="ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>

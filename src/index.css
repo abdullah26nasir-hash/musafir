@@ -1,31 +1,41 @@
 @import "tailwindcss";
 
 @theme {
-  --color-kiswa: #F7F4EC;
-  --color-ink: #FFFFFF;
-  --color-gold: #8A6B26;
-  --color-gold-soft: #C9A85C;
-  --color-dome: #156A52;
-  --color-sand: #1B2A22;
-  --color-mist: #66736A;
-  --color-clear: #2E7D4F;
-  --color-caution: #8F6117;
-  --color-warning: #B3382C;
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
-  --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  /* Musafir Brand Foundation v0.1 palette */
+  --color-kiswa: #F3EFE5;        /* Paper Sand - primary light surface */
+  --color-ink: #FAF7EF;          /* card surface - off-white, never clinical */
+  --color-stone: #D8D2C5;        /* Stone - borders, inactive */
+  --color-gold: #47695D;         /* Route Green - primary brand colour (token kept as 'gold') */
+  --color-gold-soft: #A8C5B5;    /* Signal Mint - highlights */
+  --color-saffron: #D99B58;      /* Saffron - sparing warmth accent (graphics only) */
+  --color-dome: #47695D;         /* Route Green */
+  --color-sand: #17201D;         /* Night Ink - text, never pure black */
+  --color-mist: #5F6B63;         /* secondary text, AA on Paper Sand */
+  --color-clear: #42755A;        /* Advisory: Clear */
+  --color-caution: #8F6A1F;      /* Advisory: Awareness, darkened for AA text use */
+  --color-warning: #A8453C;      /* Advisory: Severe */
+  --font-display: "Newsreader", ui-serif, Georgia, serif;
+  --font-body: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
   --font-arabic: "Amiri", serif;
 }
 
 html { color-scheme: light; }
 body {
   @apply bg-kiswa text-sand font-body antialiased;
-  background-image: radial-gradient(1200px 600px at 50% -10%, rgba(168,132,47,0.06), transparent 60%);
+  background-image: radial-gradient(1200px 600px at 50% -10%, rgba(71,105,93,0.07), transparent 60%);
 }
+/* Brand texture: paper grain at 5% (handled, not rendered) */
+body::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 60; opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+.font-mono { font-family: var(--font-mono); }
 .font-display { font-family: var(--font-display); }
 .font-arabic { font-family: var(--font-arabic); }
-.tnum { font-variant-numeric: tabular-nums; }
+.tnum { font-variant-numeric: tabular-nums; font-family: var(--font-mono); }
 
-.card { @apply bg-ink rounded-[20px] border border-mist/20; }
+.card { @apply bg-ink rounded-[20px] border border-stone; }
 .shadow-card { box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.06), 0px 1px 1px -0.5px rgba(0,0,0,0.06), 0px 3px 3px -1.5px rgba(0,0,0,0.06), 0px 12px 12px -6px rgba(0,0,0,0.12), 0px 24px 24px -12px rgba(0,0,0,0.18); }
 .shadow-hero { box-shadow: 0 2.8px 2.2px rgba(0,0,0,0.034), 0 6.7px 5.3px rgba(0,0,0,0.048), 0 12.5px 10px rgba(0,0,0,0.06), 0 22.3px 17.9px rgba(0,0,0,0.072), 0 41.8px 33.4px rgba(0,0,0,0.086), 0 100px 80px rgba(0,0,0,0.12); }
 
