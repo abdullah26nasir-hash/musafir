@@ -1,5 +1,11 @@
 # Changelog
 
+## 25 Sep 2026 (4) - Full-app night restyle (v0.3)
+- His feedback: go really dark (Behold-level near-black), drop the literal hero photo, rework the accent palette (green+saffron did not work), restyle the whole app not just the landing.
+- Near-black canvas (#070807); typography, space, and hairlines carry the landing - no hero photograph.
+- Accent palette rebuilt around the Route Green family lifted for AA on black; saffron retired from the landing; CTA is now a paper pill.
+- Dark restyle rolled through the entire app via the token layer (cards, chips, advisory colours all re-tuned for AA on near-black).
+
 ## 25 Sep 2026 (3) - Landing: spinning star removed
 - Removed the spinning star backdrop from the landing (his call). Static layout otherwise unchanged.
 
