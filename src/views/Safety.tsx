@@ -1,3 +1,4 @@
+import { UpdatesPanel } from '../components/UpdatesPanel';
 import { useEffect, useState } from 'react';
 import { getAdvice, Advice } from '../lib/data/advice';
 import { getUpdates, UpdatesPayload } from '../lib/data/updates';
@@ -40,7 +41,7 @@ export const Safety = ({ onPlan }: { onPlan: () => void }) => {
           <div className="flex-1">
             <p className="text-sm font-bold">Official travel advice <span className="ml-2"><Chip tone={a?.level || 'clear'}>{a ? (a.level === 'clear' ? 'Clear' : a.level === 'caution' ? 'Caution' : 'Warning') : '…'}</Chip></span></p>
             <p className="mt-1.5 text-sm leading-relaxed text-mist">{a ? a.levelLabel + '.' : 'Loading the FCDO page…'}</p>
-            {a && <a href={a.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs font-bold text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold">Read the full FCDO advice</a>}
+            {a && <a href={a.url} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center min-h-[44px] text-xs font-bold text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold">Read the full FCDO advice</a>}
             <SourceLine label="GOV.UK Foreign, Commonwealth & Development Office" at={advice.at} stale={advice.stale} />
           </div>
         </div>
@@ -117,12 +118,13 @@ export const Safety = ({ onPlan }: { onPlan: () => void }) => {
               <p className="text-sm font-semibold">{c.label}</p>
               {c.note && <p className="mt-0.5 text-xs text-mist">{c.note}</p>}
             </div>
-            <a href={`tel:${c.number.replace(/\s/g, '')}`} className="tnum shrink-0 rounded-full border border-gold/40 px-4 py-2 text-sm font-bold text-gold btn-press">{c.number}</a>
+            <a href={`tel:${c.number.replace(/\s/g, '')}`} className="tnum shrink-0 inline-flex items-center rounded-full border border-gold/40 px-4 min-h-[44px] text-sm font-bold text-gold btn-press">{c.number}</a>
           </div>
         ))}
       </div>
 
       <div className="mt-12 text-center"><Btn onClick={onPlan}>Plan my Umrah</Btn></div>
+    <UpdatesPanel />
     </div>
   );
 };

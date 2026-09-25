@@ -1,4 +1,4 @@
-export type View = 'welcome' | 'safety' | 'planner' | 'packages' | 'trip';
+export type View = 'welcome' | 'safety' | 'planner' | 'chat' | 'packages' | 'trip';
 export interface PlanInput {
   origin: string; travelers: number;
   month: string; // e.g. "December 2026"

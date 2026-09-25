@@ -10,7 +10,7 @@ const MONTHS = (() => {
   return out;
 })();
 
-export const Planner = ({ onDone }: { onDone: (p: PlanInput) => void }) => {
+export const Planner = ({ onDone, onChat }: { onDone: (p: PlanInput) => void; onChat?: () => void }) => {
   const [origin, setOrigin] = useState('London');
   const [travelers, setTravelers] = useState(2);
   const [month, setMonth] = useState(MONTHS[1]);
@@ -25,6 +25,7 @@ export const Planner = ({ onDone }: { onDone: (p: PlanInput) => void }) => {
   return (
     <div className="mx-auto max-w-xl px-5 pb-24 pt-10 sm:pt-14">
       <SectionTitle kicker="The plan">Shape the journey</SectionTitle>
+      {onChat && <button onClick={onChat} className="btn-press mb-8 min-h-11 rounded-full border border-mist/30 px-4 text-xs font-bold text-mist hover:text-sand -mt-4">Chat instead</button>}
 
       <Field label="Flying from">
         <div className="flex flex-wrap gap-2">

@@ -32,6 +32,10 @@ Product principles:
 - [x] Landing page: 3-step how-it-works section, edge-case strip (what happens when advisories change mid-plan)
 - [x] Live FCDO advisory fetch + parser with tier handling (all-travel / all-but-essential / regional)
 - [x] Trip planning flow wrapping the advisory verdict
+- [x] Chat-first planner: scripted 6-question conversational flow (city, travellers, month, nights, budget, city order) producing the same plan as the form, with two-way switching
+- [x] Landing redesign: chat-led hero, spinning star, gold glow, dual CTA
+- [x] Official updates panel on Safety: curated links to alharamain.gov.sa, prh.gov.sa, nusuk.sa, GOV.UK FCDO with "last checked" date, no real-time claims
+- [x] WCAG 2.1 AA contrast fixed (gold/caution darkened to 4.5:1), all touch targets >= 44px, hash back/forward navigation
 - [x] Currency conversion (open.er-api.com, GBP base, SAR + full currency set)
 - [x] PostHog analytics - EU host, lazy-loaded chunk, public project key only (no secrets client-side), app chunk ~60KB gzip
 - [x] Security headers: CSP (incl. eu-assets.i.posthog.com in connect-src), X-Frame-Options DENY, X-Content-Type-Options nosniff, noindex
@@ -98,6 +102,9 @@ PostHog (EU cloud), project 283655. Lazy-loaded so analytics never blocks the sa
 - 24 Sep: Design guides are reference, not mandate (motion + standards adopted, WebGL showcase rejected)
 - 24 Sep: D1 selected for future persistence (see section 5)
 - 24 Sep: Sequencing fixed - function + full testing first across all apps, branding deep-dive LAST
+- 25 Sep: Chat is scripted, not model-backed (ships free; a real model can come later behind a key)
+- 25 Sep: Haramain updates = curated official link-out panel, not a scraped feed (official RSS stale; X API paid; SPA terms ban scraping)
+- 25 Sep: Plan nav opens chat as the default planning entry; form remains first-class
 
 ## 10. Open questions
 
