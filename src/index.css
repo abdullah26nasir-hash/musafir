@@ -1,29 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  /* Musafir Brand Foundation v0.1 palette */
-  --color-kiswa: #F3EFE5;        /* Paper Sand - primary light surface */
-  --color-ink: #FAF7EF;          /* card surface - off-white, never clinical */
-  --color-stone: #D8D2C5;        /* Stone - borders, inactive */
-  --color-gold: #47695D;         /* Route Green - primary brand colour (token kept as 'gold') */
+  /* Musafir Brand Foundation v0.3 - Night canvas (Behold-level near-black, mono-first) */
+  --color-kiswa: #070807;        /* Near-black page canvas */
+  --color-ink: #101311;          /* Raised surface */
+  --color-stone: #262A25;        /* Hairline borders */
+  --color-gold: #7FA292;         /* Route Green, lifted for AA on black */
   --color-gold-soft: #A8C5B5;    /* Signal Mint - highlights */
-  --color-saffron: #D99B58;      /* Saffron - sparing warmth accent (graphics only) */
-  --color-dome: #47695D;         /* Route Green */
-  --color-sand: #17201D;         /* Night Ink - text, never pure black */
-  --color-mist: #5F6B63;         /* secondary text, AA on Paper Sand */
-  --color-clear: #42755A;        /* Advisory: Clear */
-  --color-caution: #8F6A1F;      /* Advisory: Awareness, darkened for AA text use */
-  --color-warning: #A8453C;      /* Advisory: Severe */
+  --color-saffron: #D99B58;      /* Saffron - retired from landing; token kept for semantic reuse */
+  --color-dome: #47695D;         /* Route Green - interactive fills (paper text on top) */
+  --color-sand: #F3EFE5;         /* Paper - primary text */
+  --color-mist: #9AA39B;         /* Secondary text, AA on near-black */
+  --color-clear: #6FA68A;        /* Advisory: Clear, lifted for dark */
+  --color-caution: #C79A3F;      /* Advisory: Awareness, lifted for dark */
+  --color-warning: #D06A5F;      /* Advisory: Severe, lifted for dark */
   --font-display: "Newsreader", ui-serif, Georgia, serif;
   --font-body: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
   --font-arabic: "Amiri", serif;
 }
 
-html { color-scheme: light; }
+html { color-scheme: dark; }
 body {
   @apply bg-kiswa text-sand font-body antialiased;
-  background-image: radial-gradient(1200px 600px at 50% -10%, rgba(71,105,93,0.07), transparent 60%);
 }
 /* Brand texture: paper grain at 5% (handled, not rendered) */
 body::after {
@@ -52,3 +51,14 @@ body::after {
   .fade-in, .spin-slow { animation: none; }
   * { transition-duration: 0.01ms !important; }
 }
+
+/* Night landing (rehaul v0.2) - scoped to Welcome */
+@theme {
+  --color-night: #0E1512;
+  --color-night-2: #131E18;
+}
+html:has(.night-root) { color-scheme: dark; }
+.night-root .tnum { font-variant-numeric: tabular-nums; }
+.night-drift { animation: nightdrift 70s ease-in-out infinite alternate; }
+@keyframes nightdrift { from { transform: scale(1) translateY(0); } to { transform: scale(1.06) translateY(-14px); } }
+@media (prefers-reduced-motion: reduce) { .night-drift { animation: none; } }
